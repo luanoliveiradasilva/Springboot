@@ -36,7 +36,6 @@ public class StudentEndPoint {
 
 		if (index == -1) {
 			return new ResponseEntity<>(new CustomErrorType("Student not found"), HttpStatus.NOT_FOUND);
-			
 		}
 
 		return new ResponseEntity<>(Student.studentList.get(index), HttpStatus.OK);
