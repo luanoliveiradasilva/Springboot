@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Component;
 
-import br.com.springBoot.awesome.model.Student;
-
 /**
  * 
  * @author elenj
