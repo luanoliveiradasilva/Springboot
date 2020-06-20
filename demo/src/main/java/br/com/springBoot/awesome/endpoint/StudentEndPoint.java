@@ -29,6 +29,11 @@ public class StudentEndPoint {
 		return new ResponseEntity<>(Student.studentList, HttpStatus.OK);
 	}
 
+	/**
+	 * Método para fazer uma GET Resquest
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public ResponseEntity<?> getStudentById(@PathVariable("id") int id) {
 		Student student = new Student();
@@ -43,6 +48,11 @@ public class StudentEndPoint {
 
 	}
 	
+	/**
+	 * Método para fazer um POST Request
+	 * @param student
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> save(@RequestBody Student student) {
 		Student.studentList.add(student);
