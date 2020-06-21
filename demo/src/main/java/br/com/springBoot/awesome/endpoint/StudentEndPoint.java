@@ -93,6 +93,7 @@ public class StudentEndPoint {
 		Student.studentList.remove(student);
 		Student.studentList.add(student);
 		return new ResponseEntity<>(HttpStatus.OK);
+		
 	}
 
 }
