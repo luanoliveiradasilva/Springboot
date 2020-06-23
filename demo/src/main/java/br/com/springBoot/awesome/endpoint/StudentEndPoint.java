@@ -1,5 +1,7 @@
 package br.com.springBoot.awesome.endpoint;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,23 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.springBoot.awesome.error.CustomErrorType;
 import br.com.springBoot.awesome.model.Student;
-import br.com.springBoot.awesome.util.DateUtil;
+import br.com.springBoot.awesome.repository.StudentRepository;
 
 @RestController
 @RequestMapping("student")
 public class StudentEndPoint {
 
-	private final DateUtil dateUtil;
-
+	
+	private final StudentRepository studentDAO;
+	
 	@Autowired
-	public StudentEndPoint(DateUtil dateUtil) {
-		this.dateUtil = dateUtil;
+	public StudentEndPoint(StudentRepository studentDAO) {
+		this.studentDAO = studentDAO;
 	}
 
 //	@RequestMapping(method = RequestMethod.GET)
 	@GetMapping()
 	public ResponseEntity<?> listAll() {
-		return new ResponseEntity<>(Student.studentList, HttpStatus.OK);
+		return new ResponseEntity<>(studentDAO.findAll(), HttpStatus.OK);
 	}
 
 	/**
@@ -39,21 +42,18 @@ public class StudentEndPoint {
 	 * @param id
 	 * @return
 	 */
-//	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> getStudentById(@PathVariable("id") int id) {
-		Student student = new Student();
-		student.setId(id);
-		int index = Student.studentList.indexOf(student);
-
-		if (index == -1) {
+	public ResponseEntity<?> getStudentById(@PathVariable("id") Long id) {		
+		
+		Optional<Student> students = studentDAO.findById(id);
+//		Student students = studentDAO.findById(id).orElse(null);
+		if (students == null) {
 			return new ResponseEntity<>(new CustomErrorType("Student not found"), HttpStatus.NOT_FOUND);
 		}
-
-		return new ResponseEntity<>(Student.studentList.get(index), HttpStatus.OK);
+		return new ResponseEntity<>(students, HttpStatus.OK);
 
 	}
-	
+
 	/**
 	 * Método POST Request
 	 * 
@@ -63,9 +63,8 @@ public class StudentEndPoint {
 	 */
 //	@RequestMapping(method = RequestMethod.POST)
 	@PostMapping
-	public ResponseEntity<?> save(@RequestBody Student student) {
-		Student.studentList.add(student);
-		return new ResponseEntity<>(student, HttpStatus.OK);
+	public ResponseEntity<?> save(@RequestBody Student students) {
+		return new ResponseEntity<>(studentDAO.save(students), HttpStatus.OK);
 	}
 
 	/**
@@ -75,9 +74,9 @@ public class StudentEndPoint {
 	 * @return
 	 */
 //	@RequestMapping(method = RequestMethod.DELETE)
-	@DeleteMapping
-	public ResponseEntity<?> delete(@RequestBody Student student) {
-		Student.studentList.remove(student);
+	@DeleteMapping(path = "/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		studentDAO.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -90,10 +89,9 @@ public class StudentEndPoint {
 //	@RequestMapping(method = RequestMethod.PUT)
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Student student) {
-		Student.studentList.remove(student);
-		Student.studentList.add(student);
+		studentDAO.save(student);
 		return new ResponseEntity<>(HttpStatus.OK);
-		
+
 	}
 
 }

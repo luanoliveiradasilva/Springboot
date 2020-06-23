@@ -58,7 +58,7 @@ public class SQLiteDialect extends Dialect {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getProperty("driverClassName"));
 		dataSource.setUrl(env.getProperty("url"));
-		dataSource.setUsername(env.getProperty("user"));
+		dataSource.setUsername(env.getProperty("username"));
 		dataSource.setPassword(env.getProperty("password"));
 		return dataSource;
 	}
