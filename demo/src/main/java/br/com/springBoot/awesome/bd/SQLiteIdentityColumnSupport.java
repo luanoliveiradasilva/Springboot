@@ -3,6 +3,7 @@ package br.com.springBoot.awesome.bd;
 import org.hibernate.boot.MappingException;
 import org.hibernate.dialect.identity.IdentityColumnSupportImpl;
 
+@Deprecated
 public class SQLiteIdentityColumnSupport extends IdentityColumnSupportImpl {
 
 	@Override

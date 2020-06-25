@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+@Deprecated
 public class SQLiteDialect extends Dialect {
 
 	public SQLiteDialect() {
