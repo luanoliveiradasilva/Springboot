@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.springBoot.awesome.error.CustomErrorType;
+import br.com.springBoot.awesome.error.ResourceNotFoundException;
 import br.com.springBoot.awesome.model.Student;
 import br.com.springBoot.awesome.repository.StudentRepository;
 
@@ -44,19 +45,13 @@ public class StudentEndPoint {
 	 */
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> getStudentById(@PathVariable("id") Long id) {		
-		
+		verifyIfStudentExist(id);
 		Optional<Student> students = studentDAO.findById(id);
-//		Student students = studentDAO.findById(id).orElse(null);
-		if (students == null) {
-			return new ResponseEntity<>(new CustomErrorType("Student not found"), HttpStatus.NOT_FOUND);
-		}
 		return new ResponseEntity<>(students, HttpStatus.OK);
-
 	}
 	
 	@GetMapping(path = "/findByName/{name}")
 	public ResponseEntity<?> findStudentByName(@PathVariable String name){
-		System.out.println(name);
 		return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
 	}
 
@@ -82,6 +77,7 @@ public class StudentEndPoint {
 //	@RequestMapping(method = RequestMethod.DELETE)
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
+		verifyIfStudentExist(id);
 		studentDAO.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -95,9 +91,16 @@ public class StudentEndPoint {
 //	@RequestMapping(method = RequestMethod.PUT)
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Student student) {
+		verifyIfStudentExist(student.getId());
 		studentDAO.save(student);
 		return new ResponseEntity<>(HttpStatus.OK);
 
+	}
+	
+	private void verifyIfStudentExist(Long id) {
+		if (studentDAO.findById(id) == null) {
+			throw new ResourceNotFoundException("Studend not found for Id: "+ id);
+		}
 	}
 
 }
