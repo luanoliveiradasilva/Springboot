@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.springBoot.awesome.error.CustomErrorType;
 import br.com.springBoot.awesome.error.ResourceNotFoundException;
 import br.com.springBoot.awesome.model.Student;
 import br.com.springBoot.awesome.repository.StudentRepository;
@@ -98,9 +97,9 @@ public class StudentEndPoint {
 	}
 	
 	private void verifyIfStudentExist(Long id) {
-		if (studentDAO.findById(id) == null) {
-			throw new ResourceNotFoundException("Studend not found for Id: "+ id);
-		}
+		Optional<Student> students = studentDAO.findById(id);
+		if (students.isEmpty())
+			throw new ResourceNotFoundException("Student not found for ID: "+ id);
 	}
 
 }
