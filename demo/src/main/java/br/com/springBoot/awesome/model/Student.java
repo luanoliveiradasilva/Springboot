@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class Student extends AbstractEntity{
-
+	
 	private String name;
 
 	public String getName() {
