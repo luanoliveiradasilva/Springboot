@@ -7,48 +7,9 @@ import javax.annotation.Generated;
  * @author elenj
  *
  */
-public class ResourceNotFoundDetails {
+public class ResourceNotFoundDetails extends ErrorDetails{
 
-	private String title;
-	private int status;
-	private String details;
-	private long timestamp;
-	private String developerMessage;
 
-	@Generated("SparkTools")
-	private ResourceNotFoundDetails(Builder builder) {
-		this.title = builder.title;
-		this.status = builder.status;
-		this.details = builder.details;
-		this.timestamp = builder.timestamp;
-		this.developerMessage = builder.developerMessage;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public String getDetails() {
-		return details;
-	}
-
-	public long getTimestamp() {
-		return timestamp;
-	}
-
-	public String getDeveloperMessage() {
-		return developerMessage;
-	}
-
-	/**
-	 * Creates builder
-	 * Builder to build {@link ResourceNotFoundDetails}.
-	 */
-	@Generated("SparkTools")
 	public static final class Builder {
 		private String title;
 		private int status;
@@ -96,7 +57,13 @@ public class ResourceNotFoundDetails {
 		}
 
 		public ResourceNotFoundDetails build() {
-			return new ResourceNotFoundDetails(this);
+			ResourceNotFoundDetails resourceNotFoundDetails = new ResourceNotFoundDetails();
+			resourceNotFoundDetails.setDeveloperMessage(developerMessage);
+			resourceNotFoundDetails.setTitle(title);
+			resourceNotFoundDetails.setDetails(details);
+			resourceNotFoundDetails.setTimestamp(timestamp);
+			resourceNotFoundDetails.setStatus(status);
+			return resourceNotFoundDetails;			
 		}
 	}
 

@@ -47,7 +47,6 @@
 			</exclusions>
 		</dependency>
 
-
 	</dependencies>
 	<build>
 		<plugins>
