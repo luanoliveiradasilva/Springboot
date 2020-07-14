@@ -2,42 +2,11 @@ package br.com.springBoot.awesome.error;
 
 import javax.annotation.Generated;
 
-public class ValidationErrorDetails extends ErrorDetails{
-	
+public class ValidationErrorDetails extends ErrorDetails {
+
 	private String field;
 	private String fieldMessage;
 	
-	
-	
-	public String getField() {
-		return field;
-	}
-
-
-
-	public void setField(String field) {
-		this.field = field;
-	}
-
-
-
-	public String getFieldMessage() {
-		return fieldMessage;
-	}
-
-
-
-	public void setFieldMessage(String fieldMessage) {
-		this.fieldMessage = fieldMessage;
-	}
-
-
-
-	/**
-	 * Creates builder
-	 * Builder to build {@link ResourceNotFoundDetails}.
-	 */
-	@Generated("SparkTools")
 	public static final class Builder {
 		private String title;
 		private int status;
@@ -103,8 +72,28 @@ public class ValidationErrorDetails extends ErrorDetails{
 			validationErrorDetails.setDetails(details);
 			validationErrorDetails.setTimestamp(timestamp);
 			validationErrorDetails.setStatus(status);
+			
 			return validationErrorDetails;			
 		}
+		
 	}
+
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+
+	public String getFieldMessage() {
+		return fieldMessage;
+	}
+
+	public void setFieldMessage(String fieldMessage) {
+		this.fieldMessage = fieldMessage;
+	}
+	
+	
 
 }

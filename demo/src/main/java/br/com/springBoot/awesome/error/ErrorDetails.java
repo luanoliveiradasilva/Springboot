@@ -4,13 +4,12 @@ import javax.annotation.Generated;
 
 public class ErrorDetails {
 	
+
 	private String title;
 	private int status;
 	private String details;
 	private long timestamp;
 	private String developerMessage;
-	
-	
 	
 	public String getTitle() {
 		return title;
@@ -50,16 +49,6 @@ public class ErrorDetails {
 
 	public void setDeveloperMessage(String developerMessage) {
 		this.developerMessage = developerMessage;
-	}
-	
-
-	@Generated("SparkTools")
-	private ErrorDetails(Builder builder) {
-		this.title = builder.title;
-		this.status = builder.status;
-		this.details = builder.details;
-		this.timestamp = builder.timestamp;
-		this.developerMessage = builder.developerMessage;
 	}
 
 	/**
@@ -111,7 +100,13 @@ public class ErrorDetails {
 		}
 
 		public ErrorDetails build() {
-			return new ErrorDetails(this);
+			ErrorDetails errorDetails = new ErrorDetails();
+			errorDetails.setTitle(title);
+			errorDetails.setStatus(status);
+			errorDetails.setDetails(details);
+			errorDetails.setTimestamp(timestamp);
+			errorDetails.setDeveloperMessage(developerMessage);
+			return errorDetails;
 		}
 	}
 	

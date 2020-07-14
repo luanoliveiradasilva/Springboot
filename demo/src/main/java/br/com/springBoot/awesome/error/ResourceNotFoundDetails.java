@@ -7,8 +7,9 @@ import javax.annotation.Generated;
  * @author elenj
  *
  */
-public class ResourceNotFoundDetails extends ErrorDetails{
 
+//TODO Concluir a construção da class ResourceNotFoundDetails, identificar o erro que aparece sobre construtor.
+public class ResourceNotFoundDetails extends ErrorDetails{
 
 	public static final class Builder {
 		private String title;
@@ -63,6 +64,7 @@ public class ResourceNotFoundDetails extends ErrorDetails{
 			resourceNotFoundDetails.setDetails(details);
 			resourceNotFoundDetails.setTimestamp(timestamp);
 			resourceNotFoundDetails.setStatus(status);
+			
 			return resourceNotFoundDetails;			
 		}
 	}
